@@ -42,13 +42,7 @@ export default function DeveloperLayout({
               <h1 className="text-xl font-bold text-foreground">Launch Taskeen</h1>
             </Link>
           </div>
-          <PersonaSwitcher
-            currentPersona="developer"
-            onPersonaChange={(persona) => {
-              // Handle persona switching - would navigate to different routes
-              console.log("Switching to:", persona)
-            }}
-          />
+          <PersonaSwitcher currentPersona="developer" />
         </div>
       </header>
 

@@ -38,12 +38,7 @@ export default function ClientLayout({
               <h1 className="text-xl font-bold text-foreground">Launch Taskeen</h1>
             </NextLink>
           </div>
-          <PersonaSwitcher
-            currentPersona="client"
-            onPersonaChange={(persona) => {
-              console.log("Switching to:", persona)
-            }}
-          />
+          <PersonaSwitcher currentPersona="client" />
         </div>
       </header>
 

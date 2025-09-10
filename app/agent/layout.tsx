@@ -40,12 +40,7 @@ export default function AgentLayout({
               <h1 className="text-xl font-bold text-foreground">Launch Taskeen</h1>
             </NextLink>
           </div>
-          <PersonaSwitcher
-            currentPersona="agent"
-            onPersonaChange={(persona) => {
-              console.log("Switching to:", persona)
-            }}
-          />
+          <PersonaSwitcher currentPersona="agent" />
         </div>
       </header>
 

@@ -3,44 +3,67 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { Building2, Calendar, Users, Settings, ChevronDown } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export type Persona = "developer" | "broker" | "agent" | "client"
+
+const getPersonaIcon = (persona: Persona) => {
+  switch (persona) {
+    case "developer":
+      return Building2
+    case "broker":
+      return Users
+    case "agent":
+      return Calendar
+    case "client":
+      return Settings
+    default:
+      return Building2
+  }
+}
 
 const personas = [
   {
     id: "developer" as Persona,
     title: "Developer Admin",
-    icon: Building2,
     color: "bg-primary text-primary-foreground",
+    href: "/developer",
   },
   {
     id: "broker" as Persona,
     title: "Broker Admin",
-    icon: Users,
     color: "bg-secondary text-secondary-foreground",
+    href: "/broker",
   },
   {
     id: "agent" as Persona,
     title: "Agent",
-    icon: Calendar,
     color: "bg-accent text-accent-foreground",
+    href: "/agent",
   },
   {
     id: "client" as Persona,
     title: "Client",
-    icon: Settings,
     color: "bg-muted text-muted-foreground",
+    href: "/client",
   },
 ]
 
 interface PersonaSwitcherProps {
   currentPersona: Persona
-  onPersonaChange: (persona: Persona) => void
 }
 
-export function PersonaSwitcher({ currentPersona, onPersonaChange }: PersonaSwitcherProps) {
+export function PersonaSwitcher({ currentPersona }: PersonaSwitcherProps) {
+  const router = useRouter()
   const current = personas.find((p) => p.id === currentPersona)
-  const CurrentIcon = current?.icon || Building2
+  const CurrentIcon = getPersonaIcon(currentPersona)
+
+  const handlePersonaChange = (persona: Persona) => {
+    const targetPersona = personas.find((p) => p.id === persona)
+    if (targetPersona) {
+      router.push(targetPersona.href)
+    }
+  }
 
   return (
     <DropdownMenu>
@@ -55,13 +78,13 @@ export function PersonaSwitcher({ currentPersona, onPersonaChange }: PersonaSwit
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         {personas.map((persona) => {
-          const Icon = persona.icon
+          const Icon = getPersonaIcon(persona.id)
           const isActive = persona.id === currentPersona
 
           return (
             <DropdownMenuItem
               key={persona.id}
-              onClick={() => onPersonaChange(persona.id)}
+              onClick={() => handlePersonaChange(persona.id)}
               className="flex items-center gap-3 cursor-pointer"
             >
               <div className={`p-1 rounded ${persona.color}`}>
