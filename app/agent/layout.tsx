@@ -5,15 +5,16 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { PersonaSwitcher } from "@/components/persona-switcher"
-import { Calendar, Users, Heart, Handshake, Settings, Menu, X } from "lucide-react"
+import { Calendar, Users, Heart, Handshake, Settings, Menu, X, UserCheck, Link } from "lucide-react"
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const navigation = [
   { name: "My Calendar", href: "/agent", icon: Calendar },
-  { name: "My Link", href: "/agent/booking-link", icon: Calendar }, // Updated icon to avoid redeclaration
-  { name: "Clients & EOIs", href: "/agent/clients", icon: Users },
+  { name: "My Link", href: "/agent/booking-link", icon: Link },
+  { name: "Leads", href: "/agent/leads", icon: UserCheck },
+  { name: "EOIs", href: "/agent/clients", icon: Users },
   { name: "Preferences", href: "/agent/preferences", icon: Heart },
   { name: "Live Settlement", href: "/agent/settlement", icon: Handshake },
   { name: "Settings", href: "/agent/settings", icon: Settings },
